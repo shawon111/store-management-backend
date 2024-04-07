@@ -11,8 +11,12 @@
     10. Show and edit individual product
 
 # Tasks
-    1. Design the schema
+    1. Design the schemas
+        * product schema
+        * sell schema
+        * user schema
+        * report schema
     2. Create products APIs
-    3. Create Sales APIs
+    3. Create Sells APIs
     4. Create Calculation APIs(Reports)
     5. Create authentication system

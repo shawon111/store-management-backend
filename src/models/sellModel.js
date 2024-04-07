@@ -14,7 +14,6 @@ sellSchema.post('save', async function(doc){
             totalSellingPrice:doc.totalSellingPrice}}
         )
     }catch(error){
-        console.log(error)
         throw new Error("error")
     }
 })

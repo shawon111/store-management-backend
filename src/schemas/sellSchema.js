@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const sellSchema = new Schema({
-    products:[
+    products: [
         {
             title: {
                 type: String,
@@ -30,6 +30,10 @@ const sellSchema = new Schema({
             }
         }
     ],
+    discount: {
+        type: Number,
+        required: true
+    },
     totalPurchasePrice: {
         type: Number,
         required: true
@@ -40,7 +44,7 @@ const sellSchema = new Schema({
     },
     profit: {
         type: Number,
-        required: true 
+        required: true
     },
     currency: {
         type: String,
@@ -53,4 +57,4 @@ const sellSchema = new Schema({
     }
 })
 
-module.exports= sellSchema;
+module.exports = sellSchema;

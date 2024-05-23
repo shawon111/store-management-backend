@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 
 // cors settings
 const corsOptions = {
-    origin: 'http://localhost:5000', 
+    origin: ['http://localhost:5000', 'https://store-management-frontend.vercel.app/', 'https://store-management-backend-lake.vercel.app/'], 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
     allowedHeaders: ['Content-Type', 'Authorization'], 
     optionsSuccessStatus: 204

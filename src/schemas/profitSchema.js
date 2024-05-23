@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const profitSchema = new Schema({
     totalProfit: {
         type: Number,
         required: true
     },
-    totalPurchasePrice: {
-        type: Number,
+    month: {
+        type: String,
         required: true
     },
-    totalSellingPrice: {
-        type: Number,
+    year: {
+        type: String,
         required: true
     }
 });
 
-module.exports= profitSchema;
+module.exports = profitSchema;

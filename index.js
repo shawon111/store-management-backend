@@ -1,7 +1,18 @@
 const express = require('express');
 const connectDB = require('./src/database/connectDB');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
+
+// cors settings
+const corsOptions = {
+    origin: 'http://localhost:5000', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+    allowedHeaders: ['Content-Type', 'Authorization'], 
+    optionsSuccessStatus: 204
+}
+
+app.use(cors(corsOptions));
 
 // import routers
 const productRouter = require('./src/controllers/productController');

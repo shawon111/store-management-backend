@@ -42,6 +42,10 @@ const sellSchema = new Schema({
         type: Number,
         required: true
     },
+    total: {
+        type: Number,
+        required: true
+    },
     profit: {
         type: Number,
         required: true
@@ -54,6 +58,10 @@ const sellSchema = new Schema({
     timeOfSell: {
         type: Date,
         default: Date.now
+    },
+    usi: {
+        type: String,
+        required: true
     }
 })
 

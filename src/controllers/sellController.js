@@ -1,6 +1,9 @@
 const express = require('express');
 const sellModel = require('../models/sellModel');
 const handleStock = require('./functions/handleStock');
+const calculateProfitOfThisMonth = require('./functions/calculateProfitOfThisMonth');
+const calculateSelingOfThisMonth = require('./functions/calculateSellingOfThisMonth');
+const calculatePurchasingOfThisMonth = require('./functions/calculatePurchsingOfThisMonth');
 const router = express.Router();
 
 // get all sells
@@ -8,6 +11,18 @@ router.get('/:page', async (req, res) => {
     const pageNumber = req.params.page;
     try {
         const sells = await sellModel.find({}).skip(12 * (pageNumber - 1)).limit(12);
+        res.status(200).json(sells);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// get recent sells
+router.get('/recent', async (req, res) => {
+    const pageNumber = req.params.page;
+    try {
+        const sells = await sellModel.find({}).limit(10);
         res.status(200).json(sells);
     } catch (err) {
         console.error(err);
@@ -72,6 +87,37 @@ router.put('/update', async (req, res) => {
         }
 
         res.status(200).json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+// profit of this month from sell
+router.get('/month/profit', async (req, res) => {
+    try {
+        const profit = await calculateProfitOfThisMonth();
+        res.status(200).json(profit);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+router.get('/month/selling', async (req, res) => {
+    try {
+        const sellingPrice = await calculateSelingOfThisMonth();
+        res.status(200).json(sellingPrice);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+router.get('/month/purchasing', async (req, res) => {
+    try {
+        const purchasingPrice = await calculatePurchasingOfThisMonth();
+        res.status(200).json(purchasingPrice);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });

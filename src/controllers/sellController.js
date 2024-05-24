@@ -20,7 +20,7 @@ router.get('/count', async (req, res) => {
 router.get('/:page', async (req, res) => {
     const pageNumber = req.params.page;
     try {
-        const sells = await sellModel.find({}).skip(12 * (pageNumber - 1)).limit(12);
+        const sells = await sellModel.find({}).skip(30 * (pageNumber - 1)).limit(30);
         res.status(200).json(sells);
     } catch (err) {
         res.status(500).json({ error: 'Internal Server Error' });

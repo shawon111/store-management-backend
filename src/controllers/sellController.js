@@ -6,6 +6,16 @@ const calculateSelingOfThisMonth = require('./functions/calculateSellingOfThisMo
 const calculatePurchasingOfThisMonth = require('./functions/calculatePurchsingOfThisMonth');
 const router = express.Router();
 
+// get all sells count
+router.get('/count', async (req, res) => {
+    try {
+        const count = await sellModel.countDocuments();
+        res.status(200).json(count);
+    } catch (err) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
 // get all sells
 router.get('/:page', async (req, res) => {
     const pageNumber = req.params.page;
@@ -13,7 +23,6 @@ router.get('/:page', async (req, res) => {
         const sells = await sellModel.find({}).skip(12 * (pageNumber - 1)).limit(12);
         res.status(200).json(sells);
     } catch (err) {
-        console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -22,7 +31,7 @@ router.get('/:page', async (req, res) => {
 router.get('/recent', async (req, res) => {
     const pageNumber = req.params.page;
     try {
-        const sells = await sellModel.find({}).limit(10);
+        const sells = await sellModel.find({}).limit(5);
         res.status(200).json(sells);
     } catch (err) {
         console.error(err);

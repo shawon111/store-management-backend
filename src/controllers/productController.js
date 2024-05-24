@@ -2,11 +2,32 @@ const express = require('express');
 const productModel = require('../models/productModel');
 const router = express.Router();
 
+// get all product count
+router.get('/count', async (req, res) => {
+    try {
+        const count = await productModel.countDocuments();
+        res.status(200).json(count);
+    } catch (err) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
 // get all products
 router.get('/:page', async (req, res) => {
     const pageNumber = req.params.page;
     try {
         const products = await productModel.find({}).skip(12 * (pageNumber - 1)).limit(12);
+        res.status(200).json(products);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// recent products
+router.get('/recent', async (req, res) => {
+    try {
+        const products = await productModel.find({}).limit(5);
         res.status(200).json(products);
     } catch (err) {
         console.error(err);
